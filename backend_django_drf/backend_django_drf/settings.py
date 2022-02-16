@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'djoser',
     'lead.apps.LeadConfig',
+    'team.apps.TeamConfig',
 ]
 
 MIDDLEWARE = [
