@@ -6,7 +6,9 @@ import LogIn from '../views/LogIn.vue'
 import Dashboard from '../views/dashboard/Dashboard.vue'
 import MyAccount from '../views/dashboard/MyAccount.vue'
 import Leads from '../views/dashboard/Leads.vue'
+import Lead from '../views/dashboard/Lead.vue'
 import AddLead from '../views/dashboard/AddLead.vue'
+import EditLead from '../views/dashboard/EditLead.vue'
 
 const routes = [
   {
@@ -64,11 +66,27 @@ const routes = [
       requireLogin: true
     }
   },
+  {
+    path: '/dashboard/lead/:id',
+    name: 'Lead',
+    component: Lead,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/lead/:id/edit',
+    name: 'EditLead',
+    component: EditLead,
+    meta: {
+      requireLogin: true
+    }
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
 })
 
 router.beforeEach((to, from, next) => {
