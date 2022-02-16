@@ -49,6 +49,8 @@
                 // console.log(this.username)
                 // console.log(this.password1)
 
+                this.$store.commit("setIsLoading", true);
+
                 axios.defaults.headers.common["Authorization"] = "";
                 localStorage.removeItem("token")
 
@@ -96,6 +98,8 @@
                             }
                         })
                 }
+
+                this.$store.commit("setIsLoading", false);
             }
         }
     }

@@ -62,6 +62,8 @@
                 // console.log(this.password1)
                 // console.log(this.password2)
 
+                this.$store.commit("setIsLoading", true);
+
                 this.errors = []
 
                 if (this.username === "") {
@@ -102,8 +104,9 @@
                                 this.errors.push("Something went wrong! Please Try Again!")    
                             }
                         })
-
                 }
+
+                this.$store.commit("setIsLoading", false);
             }
         }
     }

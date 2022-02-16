@@ -24,6 +24,7 @@
         name:"MyAccount",
         methods: {
             async logout() {
+                this.$store.commit("setIsLoading", true);
                 // console.log("Logout clicked")
                 // await axios
                 //     .post("/api/v1/token/logout/")
@@ -48,8 +49,8 @@
                 axios.defaults.headers.common["Authorization"] = "";
                 localStorage.removeItem("token")
                 this.$store.commit("removeToken")
-
                 this.$router.push("/")
+                this.$store.commit("setIsLoading", false);
             }
         }
     }
