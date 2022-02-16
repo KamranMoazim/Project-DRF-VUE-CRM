@@ -86,7 +86,7 @@
                                 duration:2000,
                                 position:"bottom-right"
                             })
-                            this.$router.push("/dashboard/my-account")
+                            // this.$router.push("/dashboard/my-account")
                         })
                         .catch((error)=>{
                             if (error.response) {
@@ -97,6 +97,30 @@
                                 this.errors.push("Something went wrong! Please Try Again!")    
                             }
                         })
+
+                    await axios
+                            .get("/api/v1/users/me/")
+                            .then((res)=>{
+                                // console.log("/api/v1/users/me/ =======> ", res)
+                                this.$store.commit("setUser", {"id":res.data.id, "username":res.data.username})
+                                localStorage.setItem("userid", res.data.id)
+                                localStorage.setItem("username", res.data.username)
+                                // this.$router.push("/dashboard/my-account")
+                            })
+                            .catch((err)=>{
+                                console.log(err)
+                            })
+
+                    await axios
+                            .get("/api/v1/teams/get-my-teams/")
+                            .then((res)=>{
+                                console.log("/api/v1/teams/get-my-teams/ =======> ", res)
+                                this.$store.commit("setTeam", {"id":res.data.id, "name":res.data.name})
+                                this.$router.push("/dashboard/my-account")
+                            })
+                            .catch((err)=>{
+                                console.log(err)
+                            })
                 }
 
                 this.$store.commit("setIsLoading", false);
