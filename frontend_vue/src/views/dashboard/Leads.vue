@@ -5,10 +5,10 @@
                 <h1 class="title">
                     Leads
                 </h1>
-                <router-link to="/dasboard/leads/add"> Add Lead </router-link>
+                <router-link :to="{name:'AddLead'}" class="button is-success"> Add Lead </router-link>
             </div>
             <div class="column is-12">
-                <table class="table">
+                <table class="table is-fullwidth">
                     <thead>
                         <tr>
                             <th>Company</th>
@@ -24,6 +24,11 @@
                             <td>{{lead.company}}</td>
                             <td>{{lead.contact_person}}</td>
                             <td>{{lead.status}}</td>
+                            <td>
+                                <router-link :to="{name:'Lead', params:{id:lead.id}}">
+                                    Details
+                                </router-link>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -36,6 +41,7 @@
 <script>
 
     import axios from "axios"
+    import {toast} from "bulma-toast"
 
     export default {
         name:"Leads",
@@ -55,10 +61,18 @@
                 await axios
                         .get("/api/v1/leads/")
                         .then((res)=>{
-                            console.log(res)
+                            // console.log(res)
                             this.leads = res.data
                         })
                         .catch((err)=>{
+                            toast({
+                                message:"Could not Get Leads from Database!",
+                                type:"is-warning",
+                                dismissible:true,
+                                pauseOnHover:true,
+                                duration:2000,
+                                position:"bottom-right"
+                            })
                             console.log(err)
                         })
 
