@@ -29,6 +29,7 @@ class Lead(models.Model):
         (HIGH, 'High'),
     }
 
+    assigned_to = models.ForeignKey(User, related_name="assignedleads", blank=True, null=True, on_delete=models.SET_NULL)
     team = models.ForeignKey(Team, related_name="leads", on_delete=models.CASCADE)
     company = models.CharField(max_length=255)
     contact_person = models.CharField(max_length=255)
