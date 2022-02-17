@@ -4,9 +4,6 @@
             <div class="column is-12">
                 <h1 class="title"> {{lead.company}} </h1>
                 <router-link :to="{name:'EditLead', params:{id:lead.id||1}}" class="button is-light">Edit</router-link>
-                <!-- :to="{name:'Lead', params:{id:lead.id}}"  -->
-                <!-- to="/dashboard/edit-lead/:id"  -->
-                <!-- :to="{name:'EditLead', params:{id:lead.id}}" -->
             </div>
             <div class="column is-6">
                 <div class="box">

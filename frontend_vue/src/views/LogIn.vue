@@ -114,7 +114,7 @@
                     await axios
                             .get("/api/v1/teams/get-my-teams/")
                             .then((res)=>{
-                                console.log("/api/v1/teams/get-my-teams/ =======> ", res)
+                                // console.log("/api/v1/teams/get-my-teams/ =======> ", res)
                                 this.$store.commit("setTeam", {"id":res.data.id, "name":res.data.name})
                                 this.$router.push("/dashboard/my-account")
                             })
