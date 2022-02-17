@@ -8,6 +8,11 @@
             <div class="column is-6">
                 <div class="box">
                     <h2 class="subtitle">Details</h2>
+                    <p><strong>Assigned To: </strong>                    
+                        <template v-if="lead.assigned_to">
+                            {{lead.assigned_to.username}}
+                        </template>
+                    </p>
                     <p><strong>Status: </strong> {{lead.status}} </p>
                     <p><strong>Priority: </strong> {{lead.priority}} </p>
                     <p><strong>Confidenc: </strong> {{lead.confidence}} </p>

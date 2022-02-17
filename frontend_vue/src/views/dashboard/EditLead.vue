@@ -74,6 +74,23 @@
                         </div>
                     </div>
                     <div class="field">
+                        <label>Assigned To</label>
+                        <div class="control">
+                            <div class="select" >
+                                <select v-model="lead.assigned_id">
+                                    <option value="" selected> Select Member </option>
+                                    <option
+                                        v-for="member in team.members"
+                                        v-bind:key="member.id"
+                                        v-bind:value="member.id"
+                                    >
+                                        {{member.username}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
                         <div class="control">
                             <button class="button is-success">Update Lead</button>
                         </div>
@@ -103,13 +120,18 @@ export default {
                 website:"",
                 confidence:0,
                 estimated_value:0,
+                assigned_id:"",
                 status:"new",
                 priority:"low"
+            },
+            team:{
+                members:[]
             }
         }
     },
     mounted(){
-        this.getLead()
+        this.getLead(),
+        this.getTeam()
     },
     methods: {
         async getLead(){
@@ -157,6 +179,21 @@ export default {
                         console.log(err)
                     })
 
+            this.$store.commit("setIsLoading", false);
+        },
+        async getTeam(){
+            this.$store.commit("setIsLoading", true);
+            await axios
+                    .get("/api/v1/teams/get-my-teams/")
+                    .then((res)=>{
+                        // console.log("/api/v1/teams/get-my-teams/ =======> ", res)
+                        this.team = res.data
+                        // this.$store.commit("setTeam", {"id":res.data.id, "name":res.data.name})
+                        // this.$router.push("/dashboard/my-account")
+                    })
+                    .catch((err)=>{
+                        console.log(err)
+                    })
             this.$store.commit("setIsLoading", false);
         }
     }
